@@ -62,6 +62,9 @@ fn main() {
 
     let start_proving_time = Instant::now();
     // Generate the proof.
+    println!(
+        "Start recursive proving"
+    );
     let proof = client
         .prove_groth16(&pk, stdin)
         .expect("failed to generate proof");
