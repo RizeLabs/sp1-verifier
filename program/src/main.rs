@@ -596,15 +596,6 @@ pub fn main() {
     // NOTE: values of n larger than 186 will overflow the u128 type,
     // resulting in output that doesn't match fibonacci sequence.
     // However, the resulting proof will still be valid!
-    let n = sp1_zkvm::io::read::<u32>();
-    let mut a: u32 = 0;
-    let mut b: u32 = 1;
-    let mut sum: u32;
-    for _ in 1..n {
-        sum = a + b;
-        a = b;
-        b = sum;
-    }
 
     println!("Inside main");
 
@@ -741,109 +732,106 @@ pub fn main() {
 
     eval_l1 = compute_lagrange(*zh, eval_l1);
 
-    let pi = computePi(pub_signal, eval_l1);
+    // let pi = computePi(pub_signal, eval_l1);
 
-    println!("Verifying proof...");
+    // println!("Verifying proof...");
 
-    let R0 = calculateR0(xi, proof.clone(), y, h0w8.clone(), lis_values.li_s0_inv);
-    let R1 = calculateR1(
-        xi,
-        proof.clone(),
-        y,
-        pi,
-        h1w4.clone(),
-        lis_values.li_s1_inv,
-        zinv,
-    );
-    let R2 = calculateR2(
-        xi,
-        gamma,
-        beta,
-        proof.clone(),
-        y,
-        eval_l1,
-        zinv,
-        h2w3.clone(),
-        h3w3.clone(),
-        lis_values.li_s2_inv,
-    );
-    let points = computeFEJ(
-        y,
-        h0w8.clone(),
-        denH1,
-        denH2,
-        alpha,
-        proof.clone(),
-        g1_affine,
-        R0,
-        R1,
-        R2,
-    );
+    // let R0 = calculateR0(xi, proof.clone(), y, h0w8.clone(), lis_values.li_s0_inv);
+    // let R1 = calculateR1(
+    //     xi,
+    //     proof.clone(),
+    //     y,
+    //     pi,
+    //     h1w4.clone(),
+    //     lis_values.li_s1_inv,
+    //     zinv,
+    // );
+    // let R2 = calculateR2(
+    //     xi,
+    //     gamma,
+    //     beta,
+    //     proof.clone(),
+    //     y,
+    //     eval_l1,
+    //     zinv,
+    //     h2w3.clone(),
+    //     h3w3.clone(),
+    //     lis_values.li_s2_inv,
+    // );
+    // let points = computeFEJ(
+    //     y,
+    //     h0w8.clone(),
+    //     denH1,
+    //     denH2,
+    //     alpha,
+    //     proof.clone(),
+    //     g1_affine,
+    //     R0,
+    //     R1,
+    //     R2,
+    // );
 
-    let F = points.0;
-    let E = points.1;
-    let J = points.2;
+    // let F = points.0;
+    // let E = points.1;
+    // let J = points.2;
 
-    let W2 = proof.w2;
+    // let W2 = proof.w2;
 
-    // first pairing value
-    let p1 = F.add(-E).add(-J).add(W2.mul(y).into_affine());
+    // // first pairing value
+    // let p1 = F.add(-E).add(-J).add(W2.mul(y).into_affine());
 
-    let g2x1 = Fq::from_str(
-        "10857046999023057135944570762232829481370756359578518086990519993285655852781",
-    )
-    .unwrap();
-    let g2x2 = Fq::from_str(
-        "11559732032986387107991004021392285783925812861821192530917403151452391805634",
-    )
-    .unwrap();
-    let g2y1 =
-        Fq::from_str("869093939501355406318588453775243436758538662501260653214950591532352435323")
-            .unwrap();
-    let g2y2 = Fq::from_str(
-        "4082367875863433681332203403145435568316851327593401208105741076214120093531",
-    )
-    .unwrap();
+    // let g2x1 = Fq::from_str(
+    //     "10857046999023057135944570762232829481370756359578518086990519993285655852781",
+    // )
+    // .unwrap();
+    // let g2x2 = Fq::from_str(
+    //     "11559732032986387107991004021392285783925812861821192530917403151452391805634",
+    // )
+    // .unwrap();
+    // let g2y1 =
+    //     Fq::from_str("869093939501355406318588453775243436758538662501260653214950591532352435323")
+    //         .unwrap();
+    // let g2y2 = Fq::from_str(
+    //     "4082367875863433681332203403145435568316851327593401208105741076214120093531",
+    // )
+    // .unwrap();
 
-    // second pairing value
-    let g2_val = G2Affine::new(Fq2::new(g2x1, g2x2), Fq2::new(g2y1, g2y2), true);
+    // // second pairing value
+    // let g2_val = G2Affine::new(Fq2::new(g2x1, g2x2), Fq2::new(g2y1, g2y2), true);
 
-    // third pairing value
-    let p3 = -W2;
+    // // third pairing value
+    // let p3 = -W2;
 
-    // fourth pairing value
-    let x2x1 = Fq::from_str(
-        "21831381940315734285607113342023901060522397560371972897001948545212302161822",
-    )
-    .unwrap();
-    let x2x2 = Fq::from_str(
-        "17231025384763736816414546592865244497437017442647097510447326538965263639101",
-    )
-    .unwrap();
-    let x2y1 = Fq::from_str(
-        "2388026358213174446665280700919698872609886601280537296205114254867301080648",
-    )
-    .unwrap();
-    let x2y2 = Fq::from_str(
-        "11507326595632554467052522095592665270651932854513688777769618397986436103170",
-    )
-    .unwrap();
+    // // fourth pairing value
+    // let x2x1 = Fq::from_str(
+    //     "21831381940315734285607113342023901060522397560371972897001948545212302161822",
+    // )
+    // .unwrap();
+    // let x2x2 = Fq::from_str(
+    //     "17231025384763736816414546592865244497437017442647097510447326538965263639101",
+    // )
+    // .unwrap();
+    // let x2y1 = Fq::from_str(
+    //     "2388026358213174446665280700919698872609886601280537296205114254867301080648",
+    // )
+    // .unwrap();
+    // let x2y2 = Fq::from_str(
+    //     "11507326595632554467052522095592665270651932854513688777769618397986436103170",
+    // )
+    // .unwrap();
 
-    println!("Doing Pairing Check!");
-    let x2_val = G2Affine::new(Fq2::new(x2x1, x2x2), Fq2::new(x2y1, x2y2), true);
-    let pairing1 = Bn254::pairing(p1, g2_val);
-    let pairing2 = Bn254::pairing(p3, x2_val);
+    // println!("Doing Pairing Check!");
+    // let x2_val = G2Affine::new(Fq2::new(x2x1, x2x2), Fq2::new(x2y1, x2y2), true);
+    // let pairing1 = Bn254::pairing(p1, g2_val);
+    // let pairing2 = Bn254::pairing(p3, x2_val);
 
-    if pairing1 == pairing2 {
-        println!("Proof Verified!");
-        // return true;
-    } else {
-        println!("Proof verification failed!");
-    }
+    // if pairing1 == pairing2 {
+    //     println!("Proof Verified!");
+    //     // return true;
+    // } else {
+    //     println!("Proof verification failed!");
+    // }
     println!("cycle-tracker-end: verification");
-    sp1_zkvm::io::commit(&n);
-    sp1_zkvm::io::commit(&a);
-    sp1_zkvm::io::commit(&b);
 }
 
 fn calculateR0(
