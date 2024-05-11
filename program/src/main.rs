@@ -732,32 +732,32 @@ pub fn main() {
 
     eval_l1 = compute_lagrange(*zh, eval_l1);
 
-    // let pi = computePi(pub_signal, eval_l1);
+    let pi = computePi(pub_signal, eval_l1);
 
-    // println!("Verifying proof...");
+    println!("Verifying proof...");
 
-    // let R0 = calculateR0(xi, proof.clone(), y, h0w8.clone(), lis_values.li_s0_inv);
-    // let R1 = calculateR1(
-    //     xi,
-    //     proof.clone(),
-    //     y,
-    //     pi,
-    //     h1w4.clone(),
-    //     lis_values.li_s1_inv,
-    //     zinv,
-    // );
-    // let R2 = calculateR2(
-    //     xi,
-    //     gamma,
-    //     beta,
-    //     proof.clone(),
-    //     y,
-    //     eval_l1,
-    //     zinv,
-    //     h2w3.clone(),
-    //     h3w3.clone(),
-    //     lis_values.li_s2_inv,
-    // );
+    let R0 = calculateR0(xi, proof.clone(), y, h0w8.clone(), lis_values.li_s0_inv);
+    let R1 = calculateR1(
+        xi,
+        proof.clone(),
+        y,
+        pi,
+        h1w4.clone(),
+        lis_values.li_s1_inv,
+        zinv,
+    );
+    let R2 = calculateR2(
+        xi,
+        gamma,
+        beta,
+        proof.clone(),
+        y,
+        eval_l1,
+        zinv,
+        h2w3.clone(),
+        h3w3.clone(),
+        lis_values.li_s2_inv,
+    );
     // let points = computeFEJ(
     //     y,
     //     h0w8.clone(),
